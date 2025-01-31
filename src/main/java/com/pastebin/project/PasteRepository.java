@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;
 
-public interface PasteRepository extends MongoRepository<PasteBin,Long> {
+public interface PasteRepository extends MongoRepository<PasteBin,String> {
     Optional<PasteBin> findByUniqueLink(String uniqueLink);
 
 }

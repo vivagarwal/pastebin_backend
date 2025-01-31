@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class PasteBinService {
@@ -16,6 +17,12 @@ public class PasteBinService {
 
     // Create a new snippet
     public PasteBin createSnippet(PasteBin pasteBin) {
+        if (pasteBin.getCreatedAt() == null) {
+            pasteBin.setCreatedAt(LocalDateTime.now());
+        }
+        if (pasteBin.getUniqueLink() == null || pasteBin.getUniqueLink().isEmpty()) {
+            pasteBin.setUniqueLink(UUID.randomUUID().toString());
+        }
         return pasteRepository.save(pasteBin);
     }
 
