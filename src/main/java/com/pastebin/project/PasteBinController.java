@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -27,8 +29,15 @@ public class PasteBinController {
 
     // GET: Retrieve a snippet using its unique link
     @GetMapping("/view/{uniqueLink}")
-    public ResponseEntity<PasteBin> getSnippet(@PathVariable String uniqueLink) {
+    public ResponseEntity<Map<String, String>> getSnippet(@PathVariable String uniqueLink) {
         Optional<PasteBin> snippet = pasteBinService.getSnippet(uniqueLink);
-        return snippet.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
+
+        return snippet
+                .map(pasteBin -> {
+                    Map<String, String> response = new HashMap<>();
+                    response.put("content", pasteBin.getContent());
+                    return ResponseEntity.ok(response);
+                })
+                .orElse(ResponseEntity.notFound().build());
     }
 }
