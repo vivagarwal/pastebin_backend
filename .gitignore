@@ -32,8 +32,8 @@ Thumbs.db
 
 # Spring Boot specific files
 .env
-application.properties
-application.yml
+#application.properties
+#application.yml
 
 # Database and cache
 *.h2.db
