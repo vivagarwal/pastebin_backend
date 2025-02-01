@@ -42,7 +42,16 @@ application.yml
 *.log.db
 
 # Dependency directories
-/.mvn/
+# Ignore everything under .mvn
+/.mvn/*
+
+# Allow only the wrapper directory
+!.mvn/wrapper/
+
+# Inside .mvn/wrapper, ignore everything except maven-wrapper.properties
+.mvn/wrapper/*
+!.mvn/wrapper/maven-wrapper.properties
+
 /node_modules/
 
 # Logs
